@@ -1,0 +1,74 @@
+{
+  "name": "lexi-bot",
+  "version": "0.0.1",
+  "description": "Slack Events API module",
+  "author": "Robert Lombardo",
+  "license": "MIT",
+  "main": "dist/index.js",
+  "bin": {
+    "slack-verify": "dist/verify.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/wheelwell/lexi-bot.git"
+  },
+  "engines": {
+    "node": ">=4.2.0"
+  },
+  "files": [
+    "dist/**/*"
+  ],
+  "scripts": {
+    "local-tunnel": "ruby ./scripts/local-tunnel.rb --port 8723 --subdomain lexibot-api",
+
+    "lint": "eslint src",
+    "lint:test": "eslint test",
+    "test:nyc": "nyc --reporter=html mocha test/**/*.js",
+    "test:mocha": "mocha test/**/*.js",
+    "test": "npm run lint && npm run build && npm run lint:test && npm run test:nyc",
+    "coverage": "nyc report --reporter=text-lcov > coverage.lcov && codecov",
+    "build": "babel src -d dist --source-maps both",
+    "prepare": "npm run build"
+  },
+  "optionalDependencies": {
+    "express": "^4.0.0"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.18.0",
+    "babel-eslint": "^7.1.1",
+    "babel-preset-es2015": "^6.18.0",
+    "babel-preset-es2016": "^6.16.0",
+    "codecov": "^3.0.4",
+    "chai": "^4.1.2",
+    "eslint": "^3.12.2",
+    "eslint-config-airbnb": "^13.0.0",
+    "eslint-config-airbnb-base": "^11.0.0",
+    "eslint-plugin-import": "^2.2.0",
+    "eslint-plugin-jsx-a11y": "^2.2.3",
+    "eslint-plugin-react": "^6.8.0",
+    "express": "^4.14.0",
+    "get-random-port": "0.0.1",
+    "lodash.isfunction": "^3.0.8",
+    "mocha": "^5.2.0",
+    "nop": "^1.0.0",
+    "nyc": "^12.0.2",
+    "proxyquire": "^1.7.10",
+    "sinon": "^4.5.0",
+    "superagent": "^3.3.1",
+    "uncaughtException": "^1.0.0"
+  },
+  "dependencies": {
+    "@aoberoi/passport-slack": "^1.0.5",
+    "@slack/client": "^4.3.1",
+    "@slack/events-api": "^2.0.0",
+    "dotenv": "^4.0.0",
+    "express": "^4.16.3",
+    "module-alias": "^2.1.0",
+    "passport": "^0.3.2",
+    "request": "^2.88.0",
+    "slugify": "^1.3.1"
+  },
+  "_moduleDirectories": [
+    "src"
+  ]
+}
